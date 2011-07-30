@@ -21,7 +21,7 @@ fi
 # USAGE and read arguments
 #---------------------------------------------
 
-if [ "$1" == "-h" ]; then
+if [ "x$1" = "x-h" ]; then
   echo "Usage: $0" >&2
   echo "  -c s4 core home" >&2
   echo "  -a s4 applications home" >&2
@@ -68,7 +68,7 @@ done
 shift $(($OPTIND-1))
 
 CONF_TYPE=$1
-if [ "x$CONF_TYPE" == "x" ] ; then
+if [ "x$CONF_TYPE" = "x" ] ; then
     CONF_TYPE="default"
 fi
 
@@ -81,16 +81,16 @@ DEBUG_OPTS=""
 JAVA_OPTS=""
 S4_OPTS=""
 
-if [ "x$CLUSTER_MANAGER" == "x" ] ; then
+if [ "x$CLUSTER_MANAGER" = "x" ] ; then
     CLUSTER_MANAGER="localhost:2181"
 fi
-if [ "x$CLUSTER_NAME" == "x" ] ; then
+if [ "x$CLUSTER_NAME" = "x" ] ; then
     CLUSTER_NAME="s4"
 fi
-if [ "x$ADAPTER_CLUSTER_NAME" == "x" ] ; then
+if [ "x$ADAPTER_CLUSTER_NAME" = "x" ] ; then
     ADAPTER_CLUSTER_NAME=$CLUSTER_NAME
 fi
-if [ "x$LOCK_DIR" == "x" ] ; then
+if [ "x$LOCK_DIR" = "x" ] ; then
     LOCK_DIR="${CORE_HOME}/lock"
 fi
 if [ "x$SEED_TIME" != "x" ] ; then
@@ -128,13 +128,13 @@ REMOTE_DEBUG_ENABLED=$(get_property "remote_debug_enabled")
 COMMLAYER_MODE=$(get_property "commlayer_mode")
 ZK_SESSION_TIMEOUT=$(get_property "zk_session_timeout")
 
-if [ "x$GC_OPTS" == "x" ] ; then
+if [ "x$GC_OPTS" = "x" ] ; then
   GC_OPTS=" -server -XX:+HeapDumpOnOutOfMemoryError -XX:+UseConcMarkSweepGC -XX:-UseGCOverheadLimit"
 fi
-if [ "x$MEM_OPTS" == "x" ] ; then
+if [ "x$MEM_OPTS" = "x" ] ; then
   MEM_OPTS="-Xms800m -Xmx2000m"
 fi
-if [ "$REMOTE_DEBUG_ENABLED" == "yes" ]; then
+if [ "x$REMOTE_DEBUG_ENABLED" = "xyes" ]; then
   DEBUG_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n"
   DEBUG_SLEEP_TIME=15000
 fi

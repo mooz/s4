@@ -21,7 +21,7 @@ fi
 # USAGE and read arguments
 #---------------------------------------------
 
-if [ "$1" == "-h" ]; then
+if [ "x$1" = "x-h" ]; then
   echo "Usage: $0" >&2
   echo "  -c s4 core home" >&2
   echo "  -a s4 apps home" >&2
@@ -65,7 +65,7 @@ done
 shift $(($OPTIND-1))
 
 CONF_TYPE=$1
-if [ "x$CONF_TYPE" == "x" ] ; then
+if [ "x$CONF_TYPE" = "x" ] ; then
     CONF_TYPE="default"
 fi
 
@@ -77,23 +77,23 @@ COMMLAYER_MODE=$(get_property "commlayer_mode")
 echo "configuration location is ${CONF_LOC}"
 echo "commlayer mode is ${COMMLAYER_MODE}"
 
-if [ "x$CLUSTER_MANAGER" == "x" ] ; then
+if [ "x$CLUSTER_MANAGER" = "x" ] ; then
     CLUSTER_MANAGER="localhost:2181"
 fi
 
-if [ "x$SENDER_CLUSTER_NAME" == "x" ] ; then
+if [ "x$SENDER_CLUSTER_NAME" = "x" ] ; then
     SENDER_CLUSTER_NAME="s4"
 fi
 
-if [ "x$LISTENER_CLUSTER_NAME" == "x" ] ; then
+if [ "x$LISTENER_CLUSTER_NAME" = "x" ] ; then
     LISTENER_CLUSTER_NAME=$SENDER_CLUSTER_NAME
 fi
 
-if [ "x$LOCK_DIR" == "x" ] ; then
+if [ "x$LOCK_DIR" = "x" ] ; then
     LOCK_DIR="${CORE_HOME}/lock"
 fi
 
-if [ "x$DATA_ADAPTER_CONF" == "x" ] ; then
+if [ "x$DATA_ADAPTER_CONF" = "x" ] ; then
     echo "No data adapter configuration specified"
     exit 1
 fi
@@ -126,7 +126,7 @@ CLASSPATH=$CLASSPATH$CP_SEP`find $APPS_HOME -name "*.jar" | awk '{p=$0"'$CP_SEP'
 JAVA_OPTS="$JAVA_OPTS -Dzk_session_timeout=5000"
 
 CLASSPATH=${CLASSPATH}${CP_SEP}${CONF_LOC}
-if [ $REDBUTTON_MODE == "true" ] ; then
+if [ "x$REDBUTTON_MODE" = "xtrue" ] ; then
     JAVA_OPTS="$JAVA_OPTS -Dcommlayer.mode=static"
 else
     JAVA_OPTS="$JAVA_OPTS -Dcommlayer.mode=${COMMLAYER_MODE}"

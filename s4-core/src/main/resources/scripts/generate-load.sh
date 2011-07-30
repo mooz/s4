@@ -15,7 +15,7 @@ fi
 # USAGE and read arguments
 #---------------------------------------------
 
-if [ "$1" == "-h" ]; then
+if [ "x$1" = "x-h" ]; then
   echo "Usage: $0" >&2
   echo "  -c s4 core home" >&2
   echo "  -a sender cluster name" >&2
@@ -60,23 +60,23 @@ shift $(($OPTIND-1))
 
 INPUT_FILE=$1
 
-if [ "x$CLUSTER_MANAGER" == "x" ] ; then
+if [ "x$CLUSTER_MANAGER" = "x" ] ; then
     CLUSTER_MANAGER="localhost:2181"
 fi
 
-if [ "x$SENDER_CLUSTER_NAME" == "x" ] ; then
+if [ "x$SENDER_CLUSTER_NAME" = "x" ] ; then
     SENDER_CLUSTER_NAME="s4"
 fi
 
-if [ "x$LISTENER_CLUSTER_NAME" == "x" ] ; then
+if [ "x$LISTENER_CLUSTER_NAME" = "x" ] ; then
     LISTENER_CLUSTER_NAME=$SENDER_CLUSTER_NAME
 fi
 
-if [ "x$RATE" == "x" ] ; then
+if [ "x$RATE" = "x" ] ; then
     RATE=80
 fi
 
-if [ "x$DISPLAY_INTERVAL" == "x" ] ; then
+if [ "x$DISPLAY_INTERVAL" = "x" ] ; then
     DISPLAY_INTERVAL=15
 fi
 
@@ -85,7 +85,7 @@ if [ "x$SCHEMA_FILE_LIST" != "x" ] ; then
 fi
 SCHEMA_FILE_LIST="${SCHEMA_FILE_LIST}${CORE_HOME}/conf/typical/schemas/EventWrapper-schema.js"
 
-if [ "x$LOCK_DIR" == "x" ] ; then
+if [ "x$LOCK_DIR" = "x" ] ; then
     LOCK_DIR="${CORE_HOME}/lock"
 fi
 
@@ -114,7 +114,7 @@ echo `${JAVA_LOC}java -version`
 #---------------------------------------------
 
 CLASSPATH=`find $CORE_HOME -name "*.jar" | awk '{p=$0"'$CP_SEP'"p;} END {print p}'`
-if [ $REDBUTTON_MODE == "true" ] ; then
+if [ "x$REDBUTTON_MODE" = "xtrue" ] ; then
     CLASSPATH=${CLASSPATH}${CP_SEP}${CORE_HOME}/conf/default
     JAVA_OPTS="$JAVA_OPTS -Dcommlayer.mode=static"
 fi

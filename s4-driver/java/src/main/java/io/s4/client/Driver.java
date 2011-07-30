@@ -277,6 +277,8 @@ public class Driver {
 
         } finally {
             sock.close();
+            if (sock != null)
+                sock.close();
         }
     }
 

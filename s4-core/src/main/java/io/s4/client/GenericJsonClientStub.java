@@ -58,6 +58,9 @@ public class GenericJsonClientStub extends ClientStub {
 
             String[] keyNames = null;
             JSONArray keyArray = json.optJSONArray("keys");
+            if (keyArray == null)
+                keyArray = json.optJSONArray("keyNames");
+
             if (keyArray != null) {
                 keyNames = new String[keyArray.length()];
                 for (int i = 0; i < keyNames.length; ++i) {
